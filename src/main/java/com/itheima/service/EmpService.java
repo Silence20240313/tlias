@@ -19,4 +19,6 @@ public interface EmpService {
     Emp getById(Integer id);
     //更新员工
     void update(Emp emp);
+    // 员工登录
+    Emp login(Emp emp);
 }

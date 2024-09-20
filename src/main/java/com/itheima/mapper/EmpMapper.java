@@ -34,4 +34,7 @@ public interface EmpMapper {
     Emp getById(Integer id);
     // 更新员工
     void update(Emp emp);
+    // 根据用户名和密码来查询员工
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp getByUsernameAndPassword(Emp emp);
 }
