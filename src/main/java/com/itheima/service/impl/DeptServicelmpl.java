@@ -1,10 +1,12 @@
 package com.itheima.service.impl;
 
 import com.itheima.mapper.DeptMapper;
+import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.Dept;
 import com.itheima.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +19,8 @@ public class DeptServicelmpl implements DeptService {
     @Autowired
     // 注入对象语句
     private DeptMapper deptMapper;// 和前面保持一致  首字母小写
+    @Autowired
+    private EmpMapper empMapper;
 
     // TODO 1.在实现类中重写list方法
     //      2.①调用mapper操作方法（用@Autowired注解，注入mapper接口）
@@ -28,9 +32,11 @@ public class DeptServicelmpl implements DeptService {
         return list;
     }
 
+    @Transactional // spring事务管理
     @Override
     public void delete(Integer id) {
-        deptMapper.delete(id);
+        deptMapper.delete(id); // 根据id删除部门数据
+        empMapper.deleteByDeptId(id);// 根据部门id删除该部门下的员工
     }
 
     @Override
